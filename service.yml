@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: apache
   labels:
-    app: apache
+    app: myweb
 spec:
   selector:
-    app: apache
+    app: myweb
   type: NodePort  
   ports:
     - port: 8080
