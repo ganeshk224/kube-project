@@ -1,7 +1,8 @@
-FROM centos:7
+FROM quay.io/centos/centos:stream8
 RUN yum install -y httpd \
     zip \
     unzip
+RUN yum clean all
 ADD https://templatemo.com/download/templatemo_554_ocean_vibes /var/www/html/
 WORKDIR /var/www/html/
 RUN unzip templatemo_554_ocean_vibes.zip
