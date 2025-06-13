@@ -20,7 +20,7 @@
       when: service_check.rc == 0
 
     - name: Create new deployment
-      command: kubectl apply -f /home/ubuntu/kube-project/deployment.yml
+      command: kubectl apply -f /home/ubuntu/kube-project/deployment.yml  --validate=false
 
     - name: Create new service
-      command: kubectl apply -f /home/ubuntu/kube-project/service.yml
+      command: kubectl apply -f /home/ubuntu/kube-project/service.yml --validate=false
