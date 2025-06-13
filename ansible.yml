@@ -1,11 +1,26 @@
 - hosts: kube
   become: true
   tasks: 
-     - name: delete old deployment
-       command: kubectl delete -f /home/ubuntu/kube-project/deployment.yml
-     - name: delete old service
-       command: kubectl delete -f /home/ubuntu/kube-project/service.yml
-     - name: create new deployment
-       command: kubectl apply -f /home/ubuntu/kube-project/deployment.yml
-     - name: create new service
-       command: kubectl apply -f /home/ubuntu/kube-project/service.yml
+    - name: Check if deployment exists
+      command: kubectl get -f /home/ubuntu/kube-project/deployment.yml
+      register: deployment_check
+      failed_when: false
+
+    - name: Delete old deployment if it exists
+      command: kubectl delete -f /home/ubuntu/kube-project/deployment.yml
+      when: deployment_check.rc == 0
+
+    - name: Check if service exists
+      command: kubectl get -f /home/ubuntu/kube-project/service.yml
+      register: service_check
+      failed_when: false
+
+    - name: Delete old service if it exists
+      command: kubectl delete -f /home/ubuntu/kube-project/service.yml
+      when: service_check.rc == 0
+
+    - name: Create new deployment
+      command: kubectl apply -f /home/ubuntu/kube-project/deployment.yml
+
+    - name: Create new service
+      command: kubectl apply -f /home/ubuntu/kube-project/service.yml
