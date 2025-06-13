@@ -1,4 +1,4 @@
-FROM centos:8
+FROM rockylinux:8
 
 # Install Apache (httpd), unzip, and zip
 RUN dnf install -y httpd zip unzip curl net-tools && \
