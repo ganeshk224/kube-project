@@ -1,20 +1,20 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: myweb
+   name: myweb
 spec:
-  replicas: 2
-  selector:
+   replicas: 2
+   selector:      # tells the controller which pods to watch/belong to
     matchLabels:
-      app: myweb
-  template:
-    metadata:
-      labels:
-        app: myweb
-    spec:
-      containers:
-      - name: myweb
-        image: ganeshk224/kube-project
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 80
+     app: myweb
+   template:
+      metadata:
+        labels:
+          app: myweb
+      spec:
+       containers:
+        - name: myweb
+          image: ganeshk224/kube-project
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
